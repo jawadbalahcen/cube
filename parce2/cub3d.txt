@@ -1,0 +1,63 @@
+                        Actual Slice Height
+Projected Slice Height= --------------------- * Distance to Projection Plane
+                        Distance to the Slice
+
+
+---------------------------------------[ HORIZONTAL INTERSECTIONS ]--------------------------------------------------|
+
+If (ALPHA == 0) ----> { there is no A intersection }								     |
+
+
+If (0 < ALPHA < PI / 2) ----> { Ax = Px + (Py - Ay)/tan(ALPHA) 
+			    Ay = rounded_down(Py/64) * (64) - 1}
+	
+If (ALPHA == PI / 2) ----> { Ax = Px
+			     Ay = rounded_down(Py/64) * (64) - 1 }
+
+If (PI / 2 < ALPHA < PI) ----> { Ax = Px - ( (Py - Ay)/tan(PI - ALPHA) )
+			         Ay = rounded_down(Py/64) * (64) - 1 }
+
+If (ALPHA == PI) ----> { there is no A intersection }
+
+If (PI < ALPHA < (3 * PI) / 2) ----> { Ax = Px - ( (Ay - Py)/tan(ALPHA - PI) )
+			               Ay = rounded_down(Py/64) * (64) + 64 }
+
+If (ALPHA == (3 * PI) / 2) ----> { Ax = Px
+			           Ay = rounded_down(Py/64) * (64) + 64 }
+
+If ((3 * PI) / 2 < ALPHA < (2 * PI)) ----> { Ax = Px + (Ay - Py)/tan((2 * PI) - ALPHA)
+			                     Ay = rounded_down(Py/64) * (64) + 64 }				     |
+
+---------------------------------------------------------------------------------------------------------------------|
+
+-------------------------------------------[ VERTICAL INTERSECTIONS ]---------------------------------------------|
+
+If (ALPHA == 0) ----> { Ax = rounded_down(Px/64) * (64) + 64
+			Ay = Py }								                  |
+
+
+If (0 < ALPHA < PI / 2) ----> { Ax = rounded_down(Px/64) * (64) + 64
+			        Ay = Py - (Ax - Px)*tan(ALPHA) }
+	
+If (ALPHA == PI / 2) ----> { there is no A intersection }
+
+If (PI / 2 < ALPHA < PI) ----> { Ax = rounded_down(Px/64) * (64) - 1 
+			         Ay =  Py - (Px - Ax)*tan(PI - ALPHA) }
+
+If (ALPHA == PI) ----> { Ax = rounded_down(Px/64) * (64) - 1
+			 Ay = Py }
+
+If (PI < ALPHA < (3 * PI) / 2) ----> { Ax = rounded_down(Px/64) * (64) - 1 
+			               Ay = Py + (Px - Ax) * tan(ALPHA - PI) }
+	
+
+
+
+If (ALPHA == (3 * PI) / 2) ----> { there is no A intersection }
+
+If ((3 * PI) / 2 < ALPHA < (2 * PI)) ----> { Ax = rounded_down(Px/64) * (64) + 64
+			                     Ay = Py + (Ax - Px)*tan((2 * PI) - ALPHA) }
+
+-----------------------------------------------------------------------------------------------------------------|
+
+-------------------------------------------[ FIND DISTANCE TO WALL ]---------------------------------------------|
