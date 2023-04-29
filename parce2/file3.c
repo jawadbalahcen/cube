@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 05:42:23 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/04/29 15:30:46 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/04/29 15:58:36 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	draw_colomn_v2(t_vars *vars, t_dist_info dist_info)
 	double	i;
 	double	j;
 
+	i = 0;
 	virt_hight = ((double)(GRID_SIZE) / dist_info.distance) * SCALE;
 	repeat_pixel = (virt_hight) / (GRID_SIZE);
 	j = 1 / (repeat_pixel);
