@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:57:56 by monabid           #+#    #+#             */
-/*   Updated: 2023/04/27 13:48:48 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/04/29 15:16:35 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int			cast_rays(t_vars *vars);
 
 //file3.c (5 func)
 void		find_wall(t_vars *vars, double ray);
-int			handle_key(t_vars *vars, double offset_angle);
 int			move_player(int key, t_vars *vars);
 int			release_btn(int key, t_vars *vars);
 int			cross_mark(void);
@@ -93,5 +92,10 @@ void		draw_sqr(t_vars *vars, int x, int y, int color, int size);
 void		draw_grid(t_vars *vars);
 void		draw_ray(t_vars *vars, double distance, double ray);
 void		put_string(t_vars *vars);
+
+
+void		draw_colomn_v2(t_vars *vars, t_dist_info dist_info);
+void		my_put_pixel_to_image_v2(void *img_ptr, int x, int y, t_wall wall);
+
 
 #endif

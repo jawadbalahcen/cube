@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/04/28 13:39:17 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/04/29 15:13:35 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ int	la_function(t_vars *vars)
 		vars->p.a += vars->state.lookspeep * LOOK_SPEED * 2;
 	if (vars->state.angle != DEF_ANGLE) //updates posissiong
 	{
-		offset_x = cos(-vars->state.angle);
-		offset_y = sin(-vars->state.angle);
+		offset_x = cos(-(vars->state.angle + vars->p.a));
+		offset_y = sin(-(vars->state.angle + vars->p.a));
 		x = vars->p.p.x + (int)(offset_x * MOVE_SPEED);
 		y = vars->p.p.y + (int)(offset_y * MOVE_SPEED);
-		if ((vars->map[(int)(y  + offset_y)/ GRID_SIZE][(int)(x  + offset_x)/ GRID_SIZE] != '1'))
+		if ((vars->map[(int)(y + offset_y) / GRID_SIZE][(int)(x + offset_x)
+				/ GRID_SIZE] != '1'))
 		{
 			vars->p.p.x = x;
 			vars->p.p.y = y;
@@ -84,14 +85,14 @@ int	la_function(t_vars *vars)
 int	mouse(int x, int y, t_vars *vars)
 {
 	int	dist;
-	int condition;
-	
+	int	condition;
+
 	mlx_mouse_show();
 	if (y < 0 || y > WIN_H || x < 0 || x > WIN_W)
 	{
 		condition = (y >= 0) && (y <= WIN_H);
-		(x < 0) && condition && mlx_mouse_move(vars->win, WIN_W, y);
-		(x > WIN_W) && condition && mlx_mouse_move(vars->win, 0, y);
+		(x < 0) && condition &&mlx_mouse_move(vars->win, WIN_W, y);
+		(x > WIN_W) && condition &&mlx_mouse_move(vars->win, 0, y);
 		vars->mouse_pos.x = 0;
 		return (0);
 	}
@@ -106,6 +107,7 @@ int	mouse(int x, int y, t_vars *vars)
 	return (0);
 }
 
+
 int	main(int argc, char const *argv[])
 {
 	t_vars	vars;
@@ -118,8 +120,8 @@ int	main(int argc, char const *argv[])
 	vars.win = mlx_new_window(vars.mlx, WIN_W, WIN_H, "CUB");
 	validation(&vars, (char **)argv);
 	init_player(&vars);
+	// draw_img(&vars);
 	cast_rays(&vars);
-	// paricing_test(&vars);
 	vars.mouse_pos.x = 0;
 	mlx_hook(vars.win, 2, 0, move_player, &vars);
 	mlx_hook(vars.win, 3, 0, release_btn, &vars);

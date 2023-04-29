@@ -1,13 +1,13 @@
-NO   ./texteurs/wall.xpm
-SO   ./texteurs/wall.xpm
-WE ./texteurs/floor.xpm
-EA ./texteurs/floor.xpm
-F  192 , 192 ,192
+NO   ./texteurs/NO.xpm
+SO   ./texteurs/SO.xpm
+WE   ./texteurs/WE.xpm
+EA ./texteurs/EA.xpm
+F  224 , 224 ,224
 C 51,25,0
 
 
         1111111111111111111111111
-        10N00000000110000000000001
+        1E000000000000000000000001
         1011000001110000000000001
         1001000000000000000000001
 111111111011000001110000000000001

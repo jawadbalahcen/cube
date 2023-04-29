@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:20:32 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/04/28 12:42:35 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/04/29 13:45:16 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,16 @@ typedef struct s_assets
 
 typedef struct s_state
 {
-	double angle;//def = -1
-	double lookspeep;//def =0
-}	t_state;
+	double angle;     //def = -1
+	double lookspeep; //def =0
+}				t_state;
+
+typedef struct s_wall
+{
+	int			x_text;
+	int			y_text;
+	void		*texture;
+}				t_wall;
 
 typedef struct s_vars
 {
@@ -98,8 +105,9 @@ typedef struct s_vars
 	void		*win;
 	void		*img_ptr;
 	long		wall_color;
+	t_wall		wall;
 	t_state		state;
-	t_cords     mouse_pos;
+	t_cords		mouse_pos;
 }				t_vars;
 
 #endif

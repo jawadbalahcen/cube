@@ -1,4 +1,4 @@
-#include "mlx/mlx.h"
+#include "cub3d.h"
 
 int	mouse_move(int x, int y, void *ptr)
 {
@@ -9,15 +9,17 @@ int	mouse_move(int x, int y, void *ptr)
 
 int main()
 {
-    void *mlx_ptr;
-    void *win_ptr;
+    // void *mlx_ptr;
+    // void *win_ptr;
 
-    mlx_ptr = mlx_init();
-    win_ptr = mlx_new_window(mlx_ptr, 500, 500, "My Window");
+    // mlx_ptr = mlx_init();
+    // win_ptr = mlx_new_window(mlx_ptr, 500, 500, "My Window");
 
-	mlx_hook(win_ptr, 6, 0, mouse_move, win_ptr);
 
-    mlx_loop(mlx_ptr);
 
+    // mlx_loop(mlx_ptr);
+double a= 4.5616;
+a++;
+printf("{%lf}\n", a);
     return 0;
 }
