@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:12:19 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/04/29 15:27:08 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/04/30 17:13:48 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	wall_side(t_inters ver_hor, t_vars *vars, t_dist_info dist_info)
 
 	x = ver_hor.ax / GRID_SIZE;
 	y = ver_hor.ay / GRID_SIZE;
+	vars->wall.is_door = 0;
 	if (y < vars->p.p.y / GRID_SIZE && dist_info.hor_or_ver == 1)
 	{
 		vars->wall.texture = vars->imgs.imgn.img;
@@ -39,6 +40,11 @@ int	wall_side(t_inters ver_hor, t_vars *vars, t_dist_info dist_info)
 		vars->wall.texture = vars->imgs.imge.img;
 		vars->wall.x_text = (int)ver_hor.ay % GRID_SIZE;
 	}
+	if (vars->map[y][x] == 'D')
+	{
+		vars->wall.texture = vars->imgs.img_door.img;
+		vars->wall.is_door = 1;
+	}
 	return (0);
 }
 
@@ -58,34 +64,18 @@ void	find_wall(t_vars *vars, double ray)
 	dist_info.distance *= cos(vars->p.a - ray);
 	draw_colomn_v2(vars, dist_info);
 }
-/*
-int	change_view(int key, t_vars *vars)
-{
-	if (key == RIGHT)
-	{
-		vars->p.a -= LOOK_SPEED;
-		// cast_rays(vars);
-	}
-	if (key == LEFT)
-	{
-		vars->p.a += LOOK_SPEED;
-		// cast_rays(vars);
-	}
-	return (0);
-}
-*/
 
 int	move_player(int key, t_vars *vars)
 {
 	(key == ESC) && cross_mark();
 	if (key == A_KEY)
-		vars->state.angle = + M_PI_2;
+		vars->state.angle = +M_PI_2;
 	if (key == W_KEY)
 		vars->state.angle = 0;
 	if (key == D_KEY)
 		vars->state.angle = -M_PI_2;
 	if (key == S_KEY)
-		vars->state.angle = + M_PI;
+		vars->state.angle = +M_PI;
 	if (key == RIGHT)
 		vars->state.lookspeep = -1;
 	if (key == LEFT)

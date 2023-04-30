@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:30:42 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/04/28 12:50:33 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/04/30 16:48:43 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	correct_angle(double *angle)
 void	check_ver_inters1(t_vars *vars, t_inters *vertical, double ray)
 {
 	if (ray == M_PI)
-		*vertical = init_inters(((vars->p.p.x / GRID_SIZE) * GRID_SIZE) - 0.0001,
+		*vertical = init_inters(((vars->p.p.x / GRID_SIZE) * GRID_SIZE)
+				- 0.0001,
 								vars->p.p.y,
 								-(GRID_SIZE),
 								0);
@@ -76,6 +77,7 @@ void	check_ver_inters(t_vars *vars, t_inters *vertical, double ray)
 
 void	find_hor_wall(t_vars *vars, t_inters *horizontal, double ray)
 {
+	vars->hor_scal = 0;
 	check_hor_inters(vars, horizontal, ray);
 	if (horizontal->ax < 0 || horizontal->ay < 0)
 		return ;
@@ -83,8 +85,16 @@ void	find_hor_wall(t_vars *vars, t_inters *horizontal, double ray)
 		/ GRID_SIZE < ft_strlen((vars->map)[(int)(horizontal->ay / GRID_SIZE)]))
 	{
 		if ((vars->map)[(int)(horizontal->ay / GRID_SIZE)][(int)(horizontal->ax
-			/ GRID_SIZE)] == '1')
+				/ GRID_SIZE)] == '1' || (vars->map)[(int)(horizontal->ay
+				/ GRID_SIZE)][(int)(horizontal->ax / GRID_SIZE)] == ' '
+			|| (vars->map)[(int)(horizontal->ay
+				/ GRID_SIZE)][(int)(horizontal->ax / GRID_SIZE)] == 'D')
+		{
+			if ((vars->map)[(int)(horizontal->ay
+					/ GRID_SIZE)][(int)(horizontal->ax / GRID_SIZE)] == 'D')
+				vars->hor_scal = 1;
 			break ;
+		}
 		horizontal->ax += horizontal->offset_x;
 		horizontal->ay += horizontal->offset_y;
 	}
@@ -92,16 +102,24 @@ void	find_hor_wall(t_vars *vars, t_inters *horizontal, double ray)
 
 void	find_ver_wall(t_vars *vars, t_inters *vertical, double ray)
 {
+	vars->ver_scal = 0;
 	check_ver_inters(vars, vertical, ray);
 	if (vertical->ax < 0 || vertical->ay < 0)
 		return ;
 	while (vertical->ax != -1 && (int)vertical->ay / GRID_SIZE < vars->size_map
 		&& (int)vertical->ay / GRID_SIZE >= 0 && (size_t)(vertical->ax
-		/ GRID_SIZE) < ft_strlen((vars->map)[(int)(vertical->ay / GRID_SIZE)]))
-	{		
+			/ GRID_SIZE) < ft_strlen((vars->map)[(int)(vertical->ay
+				/ GRID_SIZE)]))
+	{
 		if ((vars->map)[(int)(vertical->ay / GRID_SIZE)][(int)(vertical->ax
-				/ GRID_SIZE)] == '1')
+				/ GRID_SIZE)] == '1' || (vars->map)[(int)(vertical->ay
+				/ GRID_SIZE)][(int)(vertical->ax / GRID_SIZE)] == 'D')
+		{
+			if ((vars->map)[(int)(vertical->ay / GRID_SIZE)][(int)(vertical->ax
+					/ GRID_SIZE)] == 'D')
+				vars->ver_scal = 1;
 			break ;
+		}
 		vertical->ax += vertical->offset_x;
 		vertical->ay += vertical->offset_y;
 	}

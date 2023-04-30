@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/04/02 22:27:05 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/04/30 11:51:23 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	check_name(char *name)
 		args_err();
 	}
 	i = ft_strlen(name) - 1;
-	if (!(name[i] == 'b' && name[i - 1] == 'u'
-		&& name[i - 2] == 'c' && name[i - 3] == '.'))
+	if (!(name[i] == 'b' && name[i - 1] == 'u' && name[i - 2] == 'c' && name[i
+			- 3] == '.'))
 	{
 		free(name);
 		args_err();
@@ -69,11 +69,13 @@ void	size_map(t_vars *vars)
 
 void	validation(t_vars *vars, char **argv)
 {
-	char *name;
+	char	*name;
 
 	name = get_file_name(argv[1]);
 	check_name(name);
 	free(name);
 	check_content(vars, argv[1]);
 	size_map(vars);
+	vars->imgs.img_door.img = mlx_xpm_file_to_image(vars->mlx, "./texteurs/door.xpm", 
+					&vars->imgs.img_door.w, &vars->imgs.img_door.h);
 }

@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/04/29 15:13:35 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/04/30 17:25:25 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,22 @@ int	la_function(t_vars *vars)
 	double	offset_x;
 	double	offset_y;
 
-	if (vars->state.lookspeep != DEF_VIEW) //updates angle
+	if (vars->state.lookspeep != DEF_VIEW)
 		vars->p.a += vars->state.lookspeep * LOOK_SPEED * 2;
-	if (vars->state.angle != DEF_ANGLE) //updates posissiong
+	if (vars->state.angle != DEF_ANGLE)
 	{
 		offset_x = cos(-(vars->state.angle + vars->p.a));
 		offset_y = sin(-(vars->state.angle + vars->p.a));
 		x = vars->p.p.x + (int)(offset_x * MOVE_SPEED);
 		y = vars->p.p.y + (int)(offset_y * MOVE_SPEED);
-		if ((vars->map[(int)(y + offset_y) / GRID_SIZE][(int)(x + offset_x)
-				/ GRID_SIZE] != '1'))
-		{
+		if ((vars->map[vars->p.p.y / GRID_SIZE][(int)(x + (offset_x * 8))
+				/ GRID_SIZE] != '1') && (vars->map[vars->p.p.y / GRID_SIZE][(int)(x + (offset_x * 8))
+				/ GRID_SIZE] != 'D'))
 			vars->p.p.x = x;
+		if ((vars->map[(int)(y + (offset_y * 8)) / GRID_SIZE][vars->p.p.x
+				/ GRID_SIZE] != '1') && (vars->map[(int)(y + (offset_y * 8)) / GRID_SIZE][vars->p.p.x
+				/ GRID_SIZE] != 'D'))
 			vars->p.p.y = y;
-		}
 	}
 	cast_rays(vars);
 	return (1);
@@ -107,7 +109,6 @@ int	mouse(int x, int y, t_vars *vars)
 	return (0);
 }
 
-
 int	main(int argc, char const *argv[])
 {
 	t_vars	vars;
@@ -120,7 +121,6 @@ int	main(int argc, char const *argv[])
 	vars.win = mlx_new_window(vars.mlx, WIN_W, WIN_H, "CUB");
 	validation(&vars, (char **)argv);
 	init_player(&vars);
-	// draw_img(&vars);
 	cast_rays(&vars);
 	vars.mouse_pos.x = 0;
 	mlx_hook(vars.win, 2, 0, move_player, &vars);

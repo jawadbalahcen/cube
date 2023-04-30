@@ -18,29 +18,47 @@ void	draw_sqr(t_vars *vars, int x, int y, int color, int size)
 	}
 }
 
+void	draw_door(t_vars *vars, int i, int j)
+{
+	draw_sqr(vars, j * 15, i * 15, BLUE, 15);
+	draw_sqr(vars, (j * 15) + 5, i * 15, YELLOW, 6);
+	draw_sqr(vars, (j * 15) + 5, (i * 15) + 5, YELLOW, 6);
+	draw_sqr(vars, (j * 15) + 5, (i * 15) + 10, YELLOW, 6);
+}
+
 void	draw_grid(t_vars *vars)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	double	x;
+	double	y;
 
-	i = 0;
-	j = 0;
-	while (i < 11)
+	x = ((vars->p.p.x - (GRID_SIZE / 2)) / (double)GRID_SIZE);
+	y = ((vars->p.p.y - (GRID_SIZE / 2)) / (double)GRID_SIZE);
+	i = y - 5;
+	j = x - 5;
+	while (i < vars->size_map && i < y + 5)
 	{
-		j = 0;
-		while (j < 25)
+		while (i < 0)
+			i++;
+		j = x - 5;
+		while (j < (int)ft_strlen(vars->map[i]) && j < x + 5)
 		{
+			while (j < 0)
+				j++;
 			if (vars->map[i][j] == '1')
-				draw_sqr(vars, j * 64, i * 64, RED, 64);
-			else
-				draw_sqr(vars, j * 64, i * 64, BLUE, 64);
-			if (vars->map[i][j] == 'N')
-				draw_sqr(vars, vars->p.p.x, vars->p.p.y, PINK, 5);
+				draw_sqr(vars, j * 15, i * 15, RED, 15);
+			else if (vars->map[i][j] == 'D')
+				draw_sqr(vars, j * 15, i * 15, YELLOW, 15);
+			else if (vars->map[i][j] != ' ')
+				draw_sqr(vars, j * 15, i * 15, BLUE, 15);
 			j++;
 		}
 		i++;
 	}
+	draw_sqr(vars, (x * 15) + 5, (y * 15) + 5, GREEN, 6);
 }
+
 void	draw_ray(t_vars *vars, double distance, double ray)
 {
 	int		i;
@@ -52,11 +70,11 @@ void	draw_ray(t_vars *vars, double distance, double ray)
 	i = 0;
 	offset_x = cos(-ray);
 	offset_y = sin(-ray);
-	x = vars->p.p.x;
-	y = vars->p.p.y;
+	x = (((vars->p.p.x - (GRID_SIZE / 2)) / (double)GRID_SIZE) * 15) + 7;
+	y = (((vars->p.p.y - (GRID_SIZE / 2)) / (double)GRID_SIZE) * 15) + 7;
 	while (i < distance)
 	{
-		my_put_pixel_to_image(vars->img_ptr, x, y, vars->imgs.color_celing);
+		my_put_pixel_to_image(vars->img_ptr, x, y, PINK);
 		x += offset_x;
 		y += offset_y;
 		i++;
@@ -75,7 +93,7 @@ void	put_string(t_vars *vars)
 			str = ft_strjoin(ft_itoa(j), ",");
 			str = ft_strjoin(str, ft_itoa(i));
 			mlx_string_put(vars->mlx, vars->win, (j * 64) + 5, (i * 64) + 5,
-					BLACK, str);
+					GREEN, str);
 			j++;
 		}
 		i++;
