@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/05/01 14:15:11 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:14:27 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,14 @@ void	validation(t_vars *vars, char **argv)
 	free(name);
 	check_content(vars, argv[1]);
 	size_map(vars);
+	if (vars->imgs.color_floor < 16777215 / 2)
+	{
+		vars->imgs.mapc1 = vars->imgs.color_floor + 16777215 / 2;
+		vars->imgs.mapc2 = vars->imgs.color_floor + 16777215 / 4;
+	}
+	else
+	{
+		vars->imgs.mapc1 = vars->imgs.color_floor - 16777215 / 2;
+		vars->imgs.mapc2 = vars->imgs.color_floor - 16777215 / 4;
+	}
 }

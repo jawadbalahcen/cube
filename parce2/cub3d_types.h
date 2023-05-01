@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:20:32 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/05/01 14:44:09 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 19:12:50 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_assets
 	t_img		imgw;
 	int			color_floor;
 	int			color_celing;
+	int			mapc1;
+	int			mapc2;
 }				t_assets;
 
 typedef struct s_state
@@ -96,6 +98,16 @@ typedef struct s_wall
 	int			y_text;
 	void		*texture;
 }				t_wall;
+
+typedef struct s_grid_vars
+{
+	int		i;
+	int		j;
+	double	x;
+	double	y;
+	int		start_i;
+	int		start_j;
+}				t_grid_vars;
 
 typedef struct s_vars
 {

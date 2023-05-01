@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 05:42:23 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/05/01 14:16:36 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 19:13:55 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,9 @@ void	draw_colomn_v2(t_vars *vars, t_dist_info dist_info)
 
 void	mini_map(t_vars *vars)
 {
-	draw_grid(vars);
-	draw_ray(vars, 15, vars->p.a);
+	t_grid_vars gr_vrs;
+	draw_grid(vars, &gr_vrs);
+	draw_ray(vars, 15, vars->p.a, gr_vrs);
 }
 
 int	cast_rays(t_vars *vars)

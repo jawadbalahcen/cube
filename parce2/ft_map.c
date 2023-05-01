@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/05/01 14:44:57 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:22:04 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ void	change_spaces(t_vars *vars)
 		j = 0;
 		while (vars->map[i][j])
 		{
-			// if (ft_isspace(vars->map[i][j]) == 1)  // removed 1 instead of space
-			// 	vars->map[i][j] = '1';
 			if (ft_isalpha(vars->map[i][j]) == 1)
 				p++;
 			if (p == 2)
@@ -105,6 +103,8 @@ void	change_spaces(t_vars *vars)
 		}
 		i++;
 	}
+	if (p != 1)
+		error_exit(vars, "map should 1 spawning point");
 }
 
 int	ft_isblock(char c)

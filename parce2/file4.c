@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:12:19 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/05/01 14:17:00 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:57:21 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,13 @@ int	wall_side(t_inters ver_hor, t_vars *vars, t_dist_info dist_info)
 	if (dist_info.hor_or_ver == 0)
 		vars->wall.x_text = (int)ver_hor.ay % GRID_SIZE;
 	if (y < vars->p.p.y / GRID_SIZE && dist_info.hor_or_ver == 1)
-	{
 		vars->wall.texture = vars->imgs.imgn.img;
-		// vars->wall.x_text = (int)ver_hor.ax % GRID_SIZE;
-	}
 	if (y > vars->p.p.y / GRID_SIZE && dist_info.hor_or_ver == 1)
-	{
 		vars->wall.texture = vars->imgs.imgs.img;
-		// vars->wall.x_text = (int)ver_hor.ax % GRID_SIZE;
-	}
 	if (dist_info.hor_or_ver == 0 && x < vars->p.p.x / GRID_SIZE)
-	{
 		vars->wall.texture = vars->imgs.imgw.img;
-	//	vars->wall.x_text = (int)ver_hor.ay % GRID_SIZE;
-	}
 	if (dist_info.hor_or_ver == 0 && x > vars->p.p.x / GRID_SIZE)
-	{
 		vars->wall.texture = vars->imgs.imge.img;
-		// vars->wall.x_text = (int)ver_hor.ay % GRID_SIZE;
-	}
 	return (0);
 }
 
