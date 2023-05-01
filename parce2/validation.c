@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/04/30 11:51:23 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:15:11 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,4 @@ void	validation(t_vars *vars, char **argv)
 	free(name);
 	check_content(vars, argv[1]);
 	size_map(vars);
-	vars->imgs.img_door.img = mlx_xpm_file_to_image(vars->mlx, "./texteurs/door.xpm", 
-					&vars->imgs.img_door.w, &vars->imgs.img_door.h);
 }

@@ -6,25 +6,11 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 05:42:23 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/04/30 17:14:19 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:16:36 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	adj_door_dist(t_vars *vars, t_inters *horizontal, t_inters *vertical)
-{
-	if (vars->ver_scal)
-	{
-		vertical->ax += vertical->offset_x / 3;
-		vertical->ay += vertical->offset_y / 3;
-	}
-	if (vars->hor_scal)
-	{
-		horizontal->ax += horizontal->offset_x / 3;
-		horizontal->ay += horizontal->offset_y / 3;
-	}
-}
 
 t_dist_info	cal_wall_dist(t_vars *vars, t_inters *horizontal,
 		t_inters *vertical)
@@ -36,7 +22,6 @@ t_dist_info	cal_wall_dist(t_vars *vars, t_inters *horizontal,
 	ver_dis.distance = -1;
 	hor_dis.hor_or_ver = 1;
 	ver_dis.hor_or_ver = 0;
-	adj_door_dist(vars, horizontal, vertical);
 	if (horizontal->ax >= 0 && horizontal->ay >= 0)
 		hor_dis.distance = sqrt(pow(vars->p.p.x - horizontal->ax, 2)
 				+ pow(vars->p.p.y - horizontal->ay, 2));
@@ -132,8 +117,8 @@ void	my_put_pixel_to_image_v2(void *img_ptr, int x, int y, t_wall wall)
 			&size_line, &endian);
 	if (x < 0 || y < 0 || y >= WIN_H || x >= WIN_W)
 		return ;
-	if (wall.x_text < 0 || wall.y_text < 0 || wall.y_text >= GRID_SIZE * 5
-		|| wall.x_text >= GRID_SIZE)
+	if (wall.x_text < 0 || wall.y_text < 0 || wall.y_text >= GRID_SIZE
+		* TEXT_SCALE || wall.x_text >= GRID_SIZE)
 		return ;
 	pos_text = (wall.y_text * (size_line / 4) + wall.x_text);
 	data_ptr[pos] = data_ptr_text[pos_text];
@@ -160,7 +145,7 @@ void	draw_colomn_v2(t_vars *vars, t_dist_info dist_info)
 		my_put_pixel_to_image_v2(vars->img_ptr, vars->i, start, vars->wall);
 		my_put_pixel_to_image_v2(vars->img_ptr, vars->i - 1, start, vars->wall);
 		start++;
-		i += j * 5;
+		i += j * TEXT_SCALE;
 		(vars->wall.y_text) = i;
 	}
 }

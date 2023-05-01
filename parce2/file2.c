@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:30:42 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/04/30 16:48:43 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:43:51 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,18 @@ void	check_ver_inters(t_vars *vars, t_inters *vertical, double ray)
 
 void	find_hor_wall(t_vars *vars, t_inters *horizontal, double ray)
 {
-	vars->hor_scal = 0;
+	char	map_value;
+
 	check_hor_inters(vars, horizontal, ray);
 	if (horizontal->ax < 0 || horizontal->ay < 0)
 		return ;
 	while (horizontal->ax != -1 && (size_t)(horizontal->ax)
 		/ GRID_SIZE < ft_strlen((vars->map)[(int)(horizontal->ay / GRID_SIZE)]))
 	{
-		if ((vars->map)[(int)(horizontal->ay / GRID_SIZE)][(int)(horizontal->ax
-				/ GRID_SIZE)] == '1' || (vars->map)[(int)(horizontal->ay
-				/ GRID_SIZE)][(int)(horizontal->ax / GRID_SIZE)] == ' '
-			|| (vars->map)[(int)(horizontal->ay
-				/ GRID_SIZE)][(int)(horizontal->ax / GRID_SIZE)] == 'D')
-		{
-			if ((vars->map)[(int)(horizontal->ay
-					/ GRID_SIZE)][(int)(horizontal->ax / GRID_SIZE)] == 'D')
-				vars->hor_scal = 1;
+		map_value = (vars->map)[(int)(horizontal->ay
+				/ GRID_SIZE)][(int)(horizontal->ax / GRID_SIZE)];
+		if (map_value == '1' || map_value == ' ')
 			break ;
-		}
 		horizontal->ax += horizontal->offset_x;
 		horizontal->ay += horizontal->offset_y;
 	}
@@ -102,7 +96,8 @@ void	find_hor_wall(t_vars *vars, t_inters *horizontal, double ray)
 
 void	find_ver_wall(t_vars *vars, t_inters *vertical, double ray)
 {
-	vars->ver_scal = 0;
+	char	map_value;
+
 	check_ver_inters(vars, vertical, ray);
 	if (vertical->ax < 0 || vertical->ay < 0)
 		return ;
@@ -111,15 +106,10 @@ void	find_ver_wall(t_vars *vars, t_inters *vertical, double ray)
 			/ GRID_SIZE) < ft_strlen((vars->map)[(int)(vertical->ay
 				/ GRID_SIZE)]))
 	{
-		if ((vars->map)[(int)(vertical->ay / GRID_SIZE)][(int)(vertical->ax
-				/ GRID_SIZE)] == '1' || (vars->map)[(int)(vertical->ay
-				/ GRID_SIZE)][(int)(vertical->ax / GRID_SIZE)] == 'D')
-		{
-			if ((vars->map)[(int)(vertical->ay / GRID_SIZE)][(int)(vertical->ax
-					/ GRID_SIZE)] == 'D')
-				vars->ver_scal = 1;
+		map_value = (vars->map)[(int)(vertical->ay
+				/ GRID_SIZE)][(int)(vertical->ax / GRID_SIZE)];
+		if (map_value == '1' || map_value == ' ')
 			break ;
-		}
 		vertical->ax += vertical->offset_x;
 		vertical->ay += vertical->offset_y;
 	}

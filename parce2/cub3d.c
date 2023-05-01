@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/04/30 17:25:25 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:43:32 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	la_function(t_vars *vars)
 	int		y;
 	double	offset_x;
 	double	offset_y;
+	char	map_value;
 
 	if (vars->state.lookspeep != DEF_VIEW)
 		vars->p.a += vars->state.lookspeep * LOOK_SPEED * 2;
@@ -71,13 +72,13 @@ int	la_function(t_vars *vars)
 		offset_y = sin(-(vars->state.angle + vars->p.a));
 		x = vars->p.p.x + (int)(offset_x * MOVE_SPEED);
 		y = vars->p.p.y + (int)(offset_y * MOVE_SPEED);
-		if ((vars->map[vars->p.p.y / GRID_SIZE][(int)(x + (offset_x * 8))
-				/ GRID_SIZE] != '1') && (vars->map[vars->p.p.y / GRID_SIZE][(int)(x + (offset_x * 8))
-				/ GRID_SIZE] != 'D'))
+		map_value = vars->map[vars->p.p.y / GRID_SIZE][(int)(x + (offset_x * 8))
+			/ GRID_SIZE];
+		if (map_value != '1')
 			vars->p.p.x = x;
-		if ((vars->map[(int)(y + (offset_y * 8)) / GRID_SIZE][vars->p.p.x
-				/ GRID_SIZE] != '1') && (vars->map[(int)(y + (offset_y * 8)) / GRID_SIZE][vars->p.p.x
-				/ GRID_SIZE] != 'D'))
+		map_value = vars->map[(int)(y + (offset_y * 8)) / GRID_SIZE][vars->p.p.x
+			/ GRID_SIZE];
+		if (map_value != '1')
 			vars->p.p.y = y;
 	}
 	cast_rays(vars);

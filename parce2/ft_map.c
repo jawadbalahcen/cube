@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/04/30 11:45:59 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:44:57 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	end_game(t_vars *vars)
 
 int	is_char_valid(char c)
 {
-	char	s[8];
+	char	s[7];
 	int		i;
 
 	s[0] = '0';
@@ -49,8 +49,7 @@ int	is_char_valid(char c)
 	s[3] = 'E';
 	s[4] = 'W';
 	s[5] = 'S';
-	s[6] = 'D'; //<=== added 
-	s[7] = 0;
+	s[6] = 0;
 	i = 0;
 	if (ft_isspace(c) == 1)
 		return (1);
@@ -98,7 +97,7 @@ void	change_spaces(t_vars *vars)
 		{
 			// if (ft_isspace(vars->map[i][j]) == 1)  // removed 1 instead of space
 			// 	vars->map[i][j] = '1';
-			if (ft_isalpha(vars->map[i][j]) == 1 && vars->map[i][j] != 'D')
+			if (ft_isalpha(vars->map[i][j]) == 1)
 				p++;
 			if (p == 2)
 				error_exit(vars, "map should only 1 spawning point");

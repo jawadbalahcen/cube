@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:20:32 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/04/30 15:21:43 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:44:09 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define DEF_ANGLE -1
 # define DEF_VIEW 0
+
+# define TEXT_SCALE 10
 
 # define RED 0xFF3333
 # define BLUE 0x66B2FF
@@ -78,7 +80,6 @@ typedef struct s_assets
 	t_img		imgs;
 	t_img		imge;
 	t_img		imgw;
-	t_img		img_door;
 	int			color_floor;
 	int			color_celing;
 }				t_assets;
@@ -91,7 +92,6 @@ typedef struct s_state
 
 typedef struct s_wall
 {
-	int			is_door;
 	int			x_text;
 	int			y_text;
 	void		*texture;
@@ -111,8 +111,6 @@ typedef struct s_vars
 	t_wall		wall;
 	t_state		state;
 	t_cords		mouse_pos;
-	double		ver_scal;
-	double		hor_scal;
 }				t_vars;
 
 #endif

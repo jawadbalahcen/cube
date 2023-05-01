@@ -18,14 +18,6 @@ void	draw_sqr(t_vars *vars, int x, int y, int color, int size)
 	}
 }
 
-void	draw_door(t_vars *vars, int i, int j)
-{
-	draw_sqr(vars, j * 15, i * 15, BLUE, 15);
-	draw_sqr(vars, (j * 15) + 5, i * 15, YELLOW, 6);
-	draw_sqr(vars, (j * 15) + 5, (i * 15) + 5, YELLOW, 6);
-	draw_sqr(vars, (j * 15) + 5, (i * 15) + 10, YELLOW, 6);
-}
-
 void	draw_grid(t_vars *vars)
 {
 	int		i;
@@ -48,8 +40,6 @@ void	draw_grid(t_vars *vars)
 				j++;
 			if (vars->map[i][j] == '1')
 				draw_sqr(vars, j * 15, i * 15, RED, 15);
-			else if (vars->map[i][j] == 'D')
-				draw_sqr(vars, j * 15, i * 15, YELLOW, 15);
 			else if (vars->map[i][j] != ' ')
 				draw_sqr(vars, j * 15, i * 15, BLUE, 15);
 			j++;
