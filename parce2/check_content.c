@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_content.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monabid <monabid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/03/21 20:43:17 by monabid          ###   ########.fr       */
+/*   Updated: 2023/05/02 14:48:44 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	setup_val(char *line, void *to_set, int name)
 {
@@ -42,7 +41,6 @@ void	setup_val(char *line, void *to_set, int name)
 
 void	get_attr(char *line, t_vars *vars)
 {
-
 	if (ft_strlen(line) == 0)
 		return ;
 	if (line[0] == '0' || line[0] == '1')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monabid <monabid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/03/20 19:10:19 by monabid          ###   ########.fr       */
+/*   Updated: 2023/05/02 14:52:27 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ int	hex_to_int(char *hex_val)
 	res = 0;
 	while (hex_val[i])
 	{
-		res += hex_to_dig(hex_val[i]) * (int)pow(16 , j);
+		res += hex_to_dig(hex_val[i]) * (int)pow(16, j);
 		j--;
 		i++;
 	}
 	return (res);
 }
-

@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 05:42:23 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/05/01 19:13:55 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:30:14 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,6 @@ t_dist_info	cal_wall_dist(t_vars *vars, t_inters *horizontal,
 	return (hor_dis);
 }
 
-void	my_put_pixel_to_image(void *img_ptr, int x, int y, int color)
-{
-	int				size_line;
-	int				bpp;
-	int				endian;
-	unsigned int	*data_ptr;
-	int				pos;
-
-	size_line = 0;
-	bpp = 0;
-	endian = 0;
-	data_ptr = (unsigned int *)mlx_get_data_addr(img_ptr, &bpp, &size_line,
-			&endian);
-	if (x < 0 || y < 0 || y >= WIN_H || x >= WIN_W)
-		return ;
-	pos = (y * (size_line / 4) + x);
-	data_ptr[pos] = color;
-}
-
 void	draw_flr_ceil(t_vars *vars)
 {
 	int	x;
@@ -69,65 +50,41 @@ void	draw_flr_ceil(t_vars *vars)
 		{
 			if (y < WIN_H / 2)
 				my_put_pixel_to_image(vars->img_ptr, x, y,
-						vars->imgs.color_celing);
+					vars->imgs.color_celing);
 			else
 				my_put_pixel_to_image(vars->img_ptr, x, y,
-						vars->imgs.color_floor);
+					vars->imgs.color_floor);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	draw_colomn(t_vars *vars, t_dist_info dist_info)
-{
-	double	virt_hight;
-	int		end;
-	int		start;
-
-	virt_hight = ((double)(GRID_SIZE) / dist_info.distance) * SCALE;
-	start = ((double)WIN_H / 2) - (virt_hight / 2);
-	end = ((double)WIN_H / 2) + (virt_hight / 2);
-	while (start <= end)
-	{
-		my_put_pixel_to_image(vars->img_ptr, vars->i, start, vars->wall_color);
-		my_put_pixel_to_image(vars->img_ptr, vars->i - 1, start,
-				vars->wall_color);
-		start++;
-	}
-}
-
 void	my_put_pixel_to_image_v2(void *img_ptr, int x, int y, t_wall wall)
 {
-	int				size_line;
-	int				bpp;
-	int				endian;
-	unsigned int	*data_ptr;
-	unsigned int	*data_ptr_text;
-	int				pos;
-	int				pos_text;
+	t_my_pxl_put	vrs;
 
-	size_line = 0;
-	bpp = 0;
-	endian = 0;
-	data_ptr = (unsigned int *)mlx_get_data_addr(img_ptr, &bpp, &size_line,
-			&endian);
-	pos = (y * (size_line / 4) + x);
-	data_ptr_text = (unsigned int *)mlx_get_data_addr(wall.texture, &bpp,
-			&size_line, &endian);
+	vrs.size_line = 0;
+	vrs.bpp = 0;
+	vrs.endian = 0;
+	vrs.data_ptr = (unsigned int *)mlx_get_data_addr(img_ptr, &vrs.bpp,
+			&vrs.size_line, &vrs.endian);
+	vrs.pos = (y * (vrs.size_line / 4) + x);
+	vrs.data_ptr_text = (unsigned int *)mlx_get_data_addr(wall.texture,
+			&vrs.bpp, &vrs.size_line,
+			&vrs.endian);
+	vrs.pos_text = (wall.y_text * (vrs.size_line / 4) + wall.x_text);
 	if (x < 0 || y < 0 || y >= WIN_H || x >= WIN_W)
 		return ;
 	if (wall.x_text < 0 || wall.y_text < 0 || wall.y_text >= GRID_SIZE
 		* TEXT_SCALE || wall.x_text >= GRID_SIZE)
 		return ;
-	pos_text = (wall.y_text * (size_line / 4) + wall.x_text);
-	data_ptr[pos] = data_ptr_text[pos_text];
+	vrs.data_ptr[vrs.pos] = vrs.data_ptr_text[vrs.pos_text];
 }
 
 void	draw_colomn_v2(t_vars *vars, t_dist_info dist_info)
 {
 	double	virt_hight;
-	double	end;
 	double	start;
 	double	repeat_pixel;
 	double	i;
@@ -138,9 +95,8 @@ void	draw_colomn_v2(t_vars *vars, t_dist_info dist_info)
 	repeat_pixel = (virt_hight) / (GRID_SIZE);
 	j = 1 / (repeat_pixel);
 	start = ((double)WIN_H / 2) - (virt_hight / 2);
-	end = ((double)WIN_H / 2) + (virt_hight / 2);
 	vars->wall.y_text = 0;
-	while (start <= end)
+	while (start <= ((double)WIN_H / 2) + (virt_hight / 2))
 	{
 		my_put_pixel_to_image_v2(vars->img_ptr, vars->i, start, vars->wall);
 		my_put_pixel_to_image_v2(vars->img_ptr, vars->i - 1, start, vars->wall);
@@ -148,13 +104,6 @@ void	draw_colomn_v2(t_vars *vars, t_dist_info dist_info)
 		i += j * TEXT_SCALE;
 		(vars->wall.y_text) = i;
 	}
-}
-
-void	mini_map(t_vars *vars)
-{
-	t_grid_vars gr_vrs;
-	draw_grid(vars, &gr_vrs);
-	draw_ray(vars, 15, vars->p.a, gr_vrs);
 }
 
 int	cast_rays(t_vars *vars)
@@ -166,7 +115,7 @@ int	cast_rays(t_vars *vars)
 	vars->i = WIN_W;
 	mlx_clear_window(vars->mlx, vars->win);
 	correct_angle(&vars->p.a);
-	vars->img_ptr &&mlx_destroy_image(vars->mlx, vars->img_ptr);
+	vars->img_ptr && mlx_destroy_image(vars->mlx, vars->img_ptr);
 	vars->img_ptr = mlx_new_image(vars->mlx, WIN_W, WIN_H);
 	draw_flr_ceil(vars);
 	start_view = vars->p.a - (FOV / 2);

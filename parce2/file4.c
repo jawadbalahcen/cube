@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 00:12:19 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/05/01 18:57:21 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:31:11 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	find_wall(t_vars *vars, double ray)
 	find_ver_wall(vars, &vertical, ray);
 	dist_info = cal_wall_dist(vars, &horizontal, &vertical);
 	!(dist_info.hor_or_ver) && wall_side(vertical, vars, dist_info);
-	dist_info.hor_or_ver &&wall_side(horizontal, vars, dist_info);
+	dist_info.hor_or_ver && wall_side(horizontal, vars, dist_info);
 	dist_info.distance *= cos(vars->p.a - ray);
 	draw_colomn_v2(vars, dist_info);
 }

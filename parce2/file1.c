@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monabid <monabid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:35:47 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/04/27 12:55:48 by monabid          ###   ########.fr       */
+/*   Updated: 2023/05/02 14:04:52 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	get_pos(t_cords *cords, char **map, char c)
 void	init_player(t_vars *vars)
 {
 	char	*set;
+
 	vars->state.angle = DEF_ANGLE;
 	vars->state.lookspeep = DEF_VIEW;
 	set = "NESW";
@@ -77,12 +78,11 @@ void	check_hor_inters1(t_vars *vars, t_inters *horizontal, double ray)
 	if ((3 * M_PI) / 2 < ray && ray < (2 * M_PI))
 	{
 		horizontal->ay = ((vars->p.p.y / GRID_SIZE) * GRID_SIZE) + GRID_SIZE;
-		*horizontal = init_inters(
-			vars->p.p.x + ((horizontal->ay - vars->p.p.y) / tan((2 * M_PI)
-						- ray)),
-			horizontal->ay,
-			GRID_SIZE / tan((2 * M_PI) - ray),
-			GRID_SIZE);
+		*horizontal = init_inters(vars->p.p.x
+				+ ((horizontal->ay - vars->p.p.y) / tan((2 * M_PI) - ray)),
+				horizontal->ay,
+				GRID_SIZE / tan((2 * M_PI) - ray),
+				GRID_SIZE);
 	}
 }
 

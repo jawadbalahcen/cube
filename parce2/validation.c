@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/05/01 20:14:27 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:53:38 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	check_name(char *name)
 	}
 	i = ft_strlen(name) - 1;
 	if (!(name[i] == 'b' && name[i - 1] == 'u' && name[i - 2] == 'c' && name[i
-			- 3] == '.'))
+				- 3] == '.'))
 	{
 		free(name);
 		args_err();

@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/04/28 17:56:00 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:51:54 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 void	ft_save_img(char *line, void *to_set, t_vars *vars, int i)
 {
 	t_img	*img;
-	int	h;
-	int	w;
-
+	int		h;
+	int		w;
 
 	img = (t_img *)to_set;
 	if (img->img != NULL)
 		invalid_line_err(line, "dupkicit rule");
-	img->img = mlx_xpm_file_to_image(vars->mlx ,line + i,&w, &h);
+	img->img = mlx_xpm_file_to_image(vars->mlx, line + i, &w, &h);
 	if (img->img == NULL)
 		invalid_line_err(line, "invalid img");
 	img->h = h;

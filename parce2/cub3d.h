@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:57:56 by monabid           #+#    #+#             */
-/*   Updated: 2023/05/01 20:08:16 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:42:55 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,13 @@ int			move_player(int key, t_vars *vars);
 int			release_btn(int key, t_vars *vars);
 int			cross_mark(void);
 ///testfile.c
-void		draw_sqr(t_vars *vars, int x, int y, int color, int size);
+void		draw_sqr(t_vars *vars, int x, int y, int color);
 void		draw_grid(t_vars *vars, t_grid_vars *gr_vrs);
-void		draw_ray(t_vars *vars, double distance, double ray, t_grid_vars gr_vrs);
-void		put_string(t_vars *vars);
-
+void		draw_ray(t_vars *vars, double distance, double ray,
+				t_grid_vars gr_vrs);
 
 void		draw_colomn_v2(t_vars *vars, t_dist_info dist_info);
 void		my_put_pixel_to_image_v2(void *img_ptr, int x, int y, t_wall wall);
-
+void		mini_map(t_vars *vars);
 
 #endif

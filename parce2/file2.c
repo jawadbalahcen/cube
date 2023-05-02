@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:30:42 by jbalahce          #+#    #+#             */
-/*   Updated: 2023/05/01 14:43:51 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:07:26 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ void	correct_angle(double *angle)
 void	check_ver_inters1(t_vars *vars, t_inters *vertical, double ray)
 {
 	if (ray == M_PI)
-		*vertical = init_inters(((vars->p.p.x / GRID_SIZE) * GRID_SIZE)
-				- 0.0001,
-								vars->p.p.y,
-								-(GRID_SIZE),
-								0);
+		*vertical = init_inters(
+				((vars->p.p.x / GRID_SIZE) * GRID_SIZE) - 0.0001,
+				vars->p.p.y, -(GRID_SIZE), 0);
 	if (M_PI < ray && ray < (3 * M_PI) / 2)
 	{
 		vertical->ax = ((vars->p.p.x / GRID_SIZE) * GRID_SIZE) - 0.0001;
@@ -51,17 +49,16 @@ void	check_ver_inters(t_vars *vars, t_inters *vertical, double ray)
 	if (ray == 0)
 		*vertical = init_inters(((vars->p.p.x / GRID_SIZE) * GRID_SIZE)
 				+ GRID_SIZE,
-								vars->p.p.y,
-								GRID_SIZE,
-								0);
+				vars->p.p.y,
+				GRID_SIZE, 0);
 	if (0 < ray && ray < (M_PI / 2))
 	{
 		vertical->ax = ((vars->p.p.x / GRID_SIZE) * GRID_SIZE) + GRID_SIZE;
 		*vertical = init_inters(vertical->ax,
-								vars->p.p.y - ((vertical->ax - vars->p.p.x)
-										* tan(ray)),
-								GRID_SIZE,
-								-(GRID_SIZE * tan(ray)));
+				vars->p.p.y - ((vertical->ax - vars->p.p.x)
+					* tan(ray)),
+				GRID_SIZE,
+				-(GRID_SIZE * tan(ray)));
 	}
 	if (ray == M_PI_2)
 		return ;
@@ -103,7 +100,7 @@ void	find_ver_wall(t_vars *vars, t_inters *vertical, double ray)
 		return ;
 	while (vertical->ax != -1 && (int)vertical->ay / GRID_SIZE < vars->size_map
 		&& (int)vertical->ay / GRID_SIZE >= 0 && (size_t)(vertical->ax
-			/ GRID_SIZE) < ft_strlen((vars->map)[(int)(vertical->ay
+		/ GRID_SIZE) < ft_strlen((vars->map)[(int)(vertical->ay
 				/ GRID_SIZE)]))
 	{
 		map_value = (vars->map)[(int)(vertical->ay

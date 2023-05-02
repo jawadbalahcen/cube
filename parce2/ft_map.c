@@ -6,7 +6,7 @@
 /*   By: jbalahce <jbalahce@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 18:17:50 by monabid           #+#    #+#             */
-/*   Updated: 2023/05/01 18:22:04 by jbalahce         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:51:00 by jbalahce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,15 +176,14 @@ void	check_line(t_vars *vars, int index)
 			if (ft_isspace(vars->map[index][i - 1]) == 1)
 				error_exit(vars, "map must be surronded by walls \
 					(spaces are considered empty gaps or void)");
-			if (ft_isspace(vars->map[index][i + 1]) == 1
-				|| (vars->map[index][i + 1] == 0))
+			if (ft_isspace(vars->map[index][i + 1]) == 1 || (vars->map[index][i
+					+ 1] == 0))
 				error_exit(vars, "map must be surronded by walls \
 					(spaces are considered empty gaps or void)");
-			check_top_below(vars, index ,i);
+			check_top_below(vars, index, i);
 		}
 		i++;
 	}
-
 }
 
 void	check_closed(t_vars *vars)
@@ -218,5 +217,5 @@ void	handle_map(t_vars *vars, int fd)
 	check_chars(vars);
 	check_closed(vars);
 	change_spaces(vars);
-	return;
+	return ;
 }

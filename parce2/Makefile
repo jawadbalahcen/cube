@@ -16,7 +16,7 @@ FILES =	cub3d.c \
 LIBFT = ./libft/libft.a
 MLX = ./mlx/libmlx.a
 
-CAST_FILES = file1.c file2.c file3.c file4.c testfile.c
+CAST_FILES = file1.c file2.c file3.c file4.c  file5.c file6.c
 
 OBJ = $(FILES:.c=.o)
 
